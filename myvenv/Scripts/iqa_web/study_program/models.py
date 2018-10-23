@@ -69,4 +69,20 @@ class StudyProgram(models.Model):
 
 
 
+class Committee(models.Model):
+    code = models.CharField(max_length=200)
+    professor_id = models.ForeignKey(Professor, on_delete=models.PROTECT, null=True)
 
+    YEAR_CHOICES = []
+    for r in range(1980, (datetime.datetime.now().year+1)):
+        YEAR_CHOICES.append((r,r))
+    year = models.IntegerField(('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+
+    assessment_level_choices = (
+        ('Junior', 'Junior'),
+        ('Senior', 'Senior'),
+        ('Novice', 'Novice'),
+        ('Apprentice-C','Apprentice-C')
+    )
+    assessment_level = models.TextField(max_length=400, choices = assessment_level_choices)
+    profession = models.CharField(max_length=200)
