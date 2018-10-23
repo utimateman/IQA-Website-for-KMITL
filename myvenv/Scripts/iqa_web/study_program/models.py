@@ -34,7 +34,7 @@ class Professor(models.Model):
     additional_degree = models.CharField(max_length = 200, blank = True)
 
     responsible_program = models.ManyToManyField('StudyProgram', blank=True)
-    assessment_committee = models.CharField('Committee', max_length=200,blank=True)
+    committee_profile = models.ManyToManyField('Committee', blank=True)
     def __str__(self):
         return self.name_surname
 
@@ -86,3 +86,8 @@ class Committee(models.Model):
     )
     assessment_level = models.TextField(max_length=400, choices = assessment_level_choices)
     profession = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.code
+
+
