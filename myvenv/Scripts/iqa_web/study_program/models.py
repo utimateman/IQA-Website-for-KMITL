@@ -116,6 +116,27 @@ class AssessmentResult(models.Model):
     curriculum_standard = models.IntegerField(('มาตรฐานหลักสูตรตามปี'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
 
     pdf_docs = models.FileField(upload_to='assessment_details/')
+    aun_id = models.ForeignKey('AUN', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return self.code
+
+class AUN(models.Model):
+    code = models.CharField(max_length=200)
+    #assessment_id = models.ForeignKey(AssessmentResult, on_delete=models.PROTECT, null=True)
+    criteria1 = models.IntegerField()
+    criteria2 = models.IntegerField()
+    criteria3 = models.IntegerField()
+    criteria4 = models.IntegerField()
+    criteria5 = models.IntegerField()
+    criteria6 = models.IntegerField()
+    criteria7 = models.IntegerField()
+    criteria8 = models.IntegerField()
+    criteria9 = models.IntegerField()
+    criteria10 = models.IntegerField()
+    criteria11 = models.IntegerField()
+    total_score = models.IntegerField()
+
 
     def __str__(self):
         return self.code
