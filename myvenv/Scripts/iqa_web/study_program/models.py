@@ -63,7 +63,7 @@ class StudyProgram(models.Model):
     pdf_docs = models.FileField(upload_to='study_program_details/')
 
     responsible_professors = models.ManyToManyField(Professor, through=Professor.responsible_program.through, blank=True)
-
+    past_assessment = models.ManyToManyField('AssessmentResult', blank=True)
     def __str__(self):
         return self.name
 
@@ -86,8 +86,36 @@ class Committee(models.Model):
     )
     assessment_level = models.TextField(max_length=400, choices = assessment_level_choices)
     profession = models.CharField(max_length=200)
+    assessment_programs = models.ManyToManyField('AssessmentResult', blank=True)
 
     def __str__(self):
         return self.code
 
 
+class AssessmentResult(models.Model):
+    code = models.CharField(max_length=200)
+    committee_id = models.ManyToManyField(Committee, blank=True)
+    program_id = models.ForeignKey(StudyProgram, on_delete=models.PROTECT, null=True)
+
+    YEAR_CHOICES = []
+    for r in range(1980, (datetime.datetime.now().year+1)):
+        YEAR_CHOICES.append((r,r))
+    year = models.IntegerField(('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+
+    curriculum_status_choices = (
+        ('New', 'New'),
+        ('Modify', 'Modify'),
+    )
+    curriculum_status = models.TextField(max_length=400, choices = curriculum_status_choices)
+    curriculum_status_year = models.IntegerField(('หลักสูตรปี'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+
+    curriculum_standard_choices = (
+            ('New', 'New'),
+            ('Modify', 'Modify'),
+    )
+    curriculum_standard = models.IntegerField(('มาตรฐานหลักสูตรตามปี'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+
+    pdf_docs = models.FileField(upload_to='assessment_details/')
+
+    def __str__(self):
+        return self.code
