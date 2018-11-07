@@ -74,7 +74,7 @@
         <div class=bg-light>
             <ul class="list-group">
                 {% for program in programs %}
-                    <a class="list-group-item list-group-item-light" href = "{% url 'program_detail' program.id %}"><h6>{{ program.code}} : {{ program.name }}</h6></a>
+                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'program_detail' program.id %}"><h6>{{ program.code}} : {{ program.name }}</h6></a>
                 {% endfor %}
             </ul>
         </div>
