@@ -95,7 +95,7 @@
         <div class=bg-light>
             <ul class="list-group">
                 {% for responsible_program in responsible_program %}
-                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ responsible_program.name}}</a>
+                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'program_detail' responsible_program.id %}">{{ responsible_program.name}}</a>
                 {% endfor %}
             </ul>
         </div>
