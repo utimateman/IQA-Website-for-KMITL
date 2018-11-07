@@ -45,14 +45,14 @@
         <br/>
         
         <div class="text-light bg-dark border border-dark container">
-            <h4>Responsible Lecturer</h4>
+            <h4>Responsible Program</h4>
         </div>
             
-        
+        <br/>
         <div class=bg-light>
             <ul class="list-group">
                 {% for responsible_professor in professors %}
-                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ responsible_professor.name_surname}}</a>
+                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ responsible_professor.name}}</a>
                 {% endfor %}
             </ul>
         </div>

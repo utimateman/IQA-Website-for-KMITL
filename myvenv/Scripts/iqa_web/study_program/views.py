@@ -74,5 +74,13 @@ def program_detail(request, program_id):
 def professor_detail(request, professor_id):
     profile = get_object_or_404(Professor, pk=professor_id)
 
+    responsible_program = []
+    for program in profile.responsible_program.all():
+        responsible_program.append(program)
 
-    return render(request, 'professors/professor_profile.html', {'professor_profile': profile})
+    committee_list = []
+    for comittee_per_year in profile.committee_profile.all():
+        committee_list.append(comittee_per_year)
+
+ 
+    return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list})

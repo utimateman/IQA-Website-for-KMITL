@@ -1,20 +1,125 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+
+    <title>Krai</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-professor_profile.professor_id
-professor_profile.academic_title
-professor_profile.name_surname
-professor_profile.date_of_birth
-professor_profile.bsc
-professor_profile.bsc_grad_institute
-professor_profile.bsc_year
-professor_profile.msc
-professor_profile.msc_grad_institute
-professor_profile.msc_year
-professor_profile.phd
-professor_profile.phd_grad_institute
-professor_profile.phd_year
-professor_profile.phone
-professor_profile.email
-professor_profile.university
-<!--professor_profile.responsible_program-->
-<!--professor_profile.committee_profile-->
+ 
+</head>
+
+<main>
+
+
+    <!-- TITLE -->
+    <div class="container">
+
+        <br/>
+        <br/>
+        <br/>
+        <div class="text-light bg-dark border-dark container">
+            <br/>
+            <h3>{{ professor_profile.academic_title }}  {{ professor_profile.name_surname }}</h3>
+            <br/>
+        </div>
+
+        <!-- BASIC INFO -->
+        <div class="container bg-light border">
+            <br/>
+            <h5>code: {{ professor_profile.professor_id }}</h5>
+            <h5>university: {{ professor_profile.university }}</h5>
+            <!--<h5>date of birth: {{ professor_profile.date_of_birth }}</h5>-->
+            <h5>email: {{ professor_profile.email }}</h5>
+            <h5>tel: {{ professor_profile.phone }}</h5>
+            <br/>
+            <!--<a class="nav-item nav-link" href="{{ program_detail.pdf_docs.url }}">docs</a>-->
+            <br/>
+        </div>
+        <br/>
+        <br/>
+        
+        <!-- EDUCATION INFO -->
+        <div class="text-light bg-dark border border-dark container">
+            <h3>Education</h3>
+        </div>
+
+        <div class="container bg-light border">
+            <br/>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{professor_profile.phd_year}} : {{professor_profile.phd}}</h5>
+                    <p class="card-text">{{professor_profile.phd_grad_institute}}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{professor_profile.msc_year}} : {{professor_profile.msc}}</h5>
+                    <p class="card-text">{{professor_profile.msc_grad_institute}}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{professor_profile.bsc_year}} : {{professor_profile.bsc}}</h5>
+                    <p class="card-text">{{professor_profile.bsc_grad_institute}}</p>
+                </div>
+            </div>
+
+            <br/>
+            <!--<a class="nav-item nav-link" href="{{ program_detail.pdf_docs.url }}">docs</a>--> 
+        </div>
+
+
+        <br/>
+        <br/>
+            
+        
+        <!--professor_profile.responsible_program-->
+        <!--professor_profile.committee_profile-->
+
+        <!-- RESPONSIBLE PROGRAM -->
+        <div class="text-light bg-dark border border-dark container">
+            <h4>Responsible Program</h4>
+        </div>
+
+        <div class=bg-light>
+            <ul class="list-group">
+                {% for responsible_program in responsible_program %}
+                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ responsible_program.name}}</a>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+
+        <!-- COMMITTEE PROFILE -->
+        <div class="text-light bg-dark border border-dark container">
+            <h4>Committee Profile</h4>
+        </div>
+
+        <div class=bg-light>
+            <ul class="list-group">
+                {% for year in committee_list %}
+                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ year.year}} : {{ year.assessment_level }}</a>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+        
+
+    </div>
+
+</main>

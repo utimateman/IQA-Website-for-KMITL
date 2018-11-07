@@ -52,7 +52,7 @@
         <div class=bg-light>
             <ul class="list-group">
                 {% for responsible_professor in professors %}
-                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ responsible_professor.name_surname}}</a>
+                    <a class="list-group-item list-group-item-light bg-light"  href = "{% url 'professor_profile' responsible_professor.id %}">{{ responsible_professor.name_surname}}</a>
                 {% endfor %}
             </ul>
         </div>
