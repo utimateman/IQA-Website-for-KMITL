@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import StudyProgram, Professor
+from .models import StudyProgram, Professor, AssessmentResult
 
 import math
 
@@ -84,3 +84,48 @@ def professor_detail(request, professor_id):
 
  
     return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list})
+
+
+
+
+def all_assessments(request, page_number=1):
+        
+    from_item = (page_number * 10) - 10
+    to_item = page_number * 10
+
+    ar = AssessmentResult.objects # get object
+    assessments = ar.all() # get all objects
+    total_assessment = ar.count() # get length of object
+
+    assessment_list = []
+
+    for assessment in assessments:
+        assessment_list.append(assessment)
+    
+    # get 10 items/ page
+    assessment_list = assessment_list[from_item:to_item]
+
+    # adjust page button
+    prev_page = page_number - 1
+    if(page_number - 1 < 1):
+        prev_page = 1  
+
+    current_page = page_number
+
+    next_page = page_number + 1
+    if(next_page > math.ceil(total_assessment/10)):
+        next_page = current_page
+
+   
+    return render(request, 'assessment/all_assessment.html', {'assessments': assessment_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
+
+def assessment_result(request, assessment_id):
+    detail = get_object_or_404(AssessmentResult, pk=assessment_id)
+
+    commitee_list = []
+    for committee in detail.committee_id.all():
+        commitee_list.append(committee)
+
+    #assessment_result.aun_id
+
+    return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list})

@@ -1,3 +1,6 @@
+
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,66 +23,69 @@
 <main>
 
 
-  
+    <!-- TITLE -->
     <div class="container">
 
         <br/>
         <br/>
         <br/>
-        
-        <!-- TITLE -->
         <div class="text-light bg-dark border-dark container">
             <br/>
-            <h3>{{ program_detail.name }} : {{ program_detail.program_status }}</h3>
+            <h3>{{assessment_result.year}} : {{ assessment_result.program_id }}</h3>
             <br/>
         </div>
-
 
         <!-- BASIC INFO -->
         <div class="container bg-light border">
             <br/>
-            <h5>code: {{ program_detail.code }}</h5>
-            <h5>degree: {{ program_detail.degree_and_major }}</h5>
-            <h5>collaboration: {{ program_detail.collaboration_with_other_institues }}</h5>
+            <h5>code: {{ assessment_result.code }}</h5>
+            <h5>status: {{ assessment_result.curriculum_status }}</h5>
+            <h5>program standard: {{ assessment_result.curriculum_standard }}: {{assessment_result.curriculum_standard}}</h5>
             <br/>
-            <a class= "btn btn-primary" href="{{ program_detail.pdf_docs.url }}">docs</a>
+            <a class="btn btn-primary" href="{{ assessment_result.pdf_docs }}">docs</a>
             <br/>
             <br/>
         </div>
         <br/>
         <br/>
         
+
+        <!-- ASSESSING COMMITTEE PROFILE -->
         <div class="text-light bg-dark border border-dark container">
-            <h4>Responsible Lecturer</h4>
+            <h4>Responsible Program</h4>
         </div>
             
-        <!-- RESPONSIBLE PROFESSOR -->
+        <br/>
         <div class=bg-light>
             <ul class="list-group">
-                {% for responsible_professor in professors %}
-                    <a class="list-group-item list-group-item-light bg-light"  href = "{% url 'professor_profile' responsible_professor.id %}">{{ responsible_professor.name_surname}}</a>
+                {% for committee in commitee_list %}
+                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ committee.professor_id}}</a>
                 {% endfor %}
             </ul>
         </div>
+
         <br/>
         <br/>
 
         
-        <!-- ASSESSMENT RESULT -->
+        <!-- AUN 
         <div class="text-light bg-dark border border-dark container">
-            <h4>Assesment Result</h4>
+            <h4>AUN</h4>
         </div>
-        <div class= "container bg-light border">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-        </div>
-        <br/>
-        <br/>
 
+        <div class=bg-light>
+            <ul class="list-group">
+                {% for responsible_program in responsible_program %}
+                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'program_detail' responsible_program.id %}">{{ responsible_program.name}}</a>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+        -->
+        
+        
 
     </div>
 
