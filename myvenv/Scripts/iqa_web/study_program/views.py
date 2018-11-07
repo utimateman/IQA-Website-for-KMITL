@@ -2,11 +2,63 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import StudyProgram
 
+import math
 # Create your views here.
 
-def all_programs(request):
-    programs = StudyProgram.objects
-    return render(request, 'study_program/all_program.html', {'programs': programs})
+
+def all_programs(request, page_number = 1):
+    
+    from_item = (page_number * 10) - 10
+    to_item = page_number * 10
+
+    sp = StudyProgram.objects # get object
+    programs = sp.all() # get all objects
+    total_program = sp.count() # get length of object
+  
+
+    
+    
+    
+    
+    program_list = []
+    found = False
+    faculty_search = request.GET.get('faculty_name')
+    if(faculty_search != None):
+        print(faculty_search)
+        for item in programs:
+            print(item.name)
+            if(item.name == faculty_search):
+                found = True
+                program_list.append(item)
+                #search_list = item
+
+
+    # number of previous page
+    
+
+    if(found == True):
+        prev_page = 1
+        current_page = 1
+        next_page = 1
+        return render(request, 'study_program/all_program.html', {'programs': program_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
+    else:
+        for item in programs:
+            program_list.append(item)
+            
+        program_list = program_list[from_item:to_item]
+
+        prev_page = page_number - 1
+        if(page_number - 1 < 1):
+            prev_page = 1  
+
+        current_page = page_number
+
+        next_page = page_number + 1
+        if(next_page > math.ceil(total_program/10)):
+            next_page = current_page
+
+        return render(request, 'study_program/all_program.html', {'programs': program_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
+
 
 def program_detail(request, program_id):
     detail = get_object_or_404(StudyProgram, pk=program_id)

@@ -22,19 +22,20 @@
     
         <br/>
         <br/>
+        <!-- PROGRAM LIST HEADER -->
         <div class="container border-dark bg-dark text-light">
            
             <br/>
             <h1>Program List</h1>
             <br/>
-           
         </div>
-    
+        
+        <!-- NAVBAR -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border" name="TOP NAVBAR">
            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0" action="{% url 'all_program' current_page %}" method="get"> <!-- submit query -->
+                    <input class="form-control mr-sm-2" name="faculty_name" type="search" placeholder="Search" aria-label="Search" value={{request.GET.faculty_name}}>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
     
@@ -68,15 +69,28 @@
     
         <br/>
 
+    
+        <!-- PROGRAM LIST -->
         <div class=bg-light>
-         
             <ul class="list-group">
-                {% for program in programs.all %}
+                {% for program in programs %}
                     <a class="list-group-item list-group-item-light" href = "{% url 'program_detail' program.id %}"><h6>{{ program.code}} : {{ program.name }}</h6></a>
                 {% endfor %}
             </ul>
-            
         </div>
 
+        <!-- CHANGE PAGE -->
+        <div class="container border-dark bg-dark text-light text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-secondary border-dark bg-dark" href="{% url 'all_program' prev_page %}">back</a>
+                <button type="button" class="btn btn-secondary border-dark bg-dark">{{current_page}}</button>
+                <a class="btn btn-secondary border-dark bg-dark" href="{% url 'all_program' next_page %}">next</a>
+            </div>
+            <br/>
+        </div>
+      
+     
+        
+       
       
 </div>

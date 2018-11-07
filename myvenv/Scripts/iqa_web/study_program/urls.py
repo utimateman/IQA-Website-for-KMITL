@@ -1,9 +1,14 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
 
+
+
 urlpatterns = [
-    path('', views.all_programs, name='all_programs'),
+    path('study_program/', views.all_programs, name = 'all_program'),
+    path('study_program/<int:page_number>/', views.all_programs, name = 'all_program'),
     path('<int:program_id>/', views.program_detail, name='program_detail')
 ]
+
+
