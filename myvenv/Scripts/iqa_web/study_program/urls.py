@@ -19,6 +19,10 @@ urlpatterns = [
     path('assessment/', views.all_assessments, name = 'all_assessment'),
     path('assessment/<int:page_number>/', views.all_assessments, name = 'all_assessment'),
     path('assessment_result/<int:assessment_id>/', views.assessment_result, name = 'assessment_result'),
+
+    path('committee/', views.all_committees, name = 'all_committee'),
+    path('committee/<int:page_number>/', views.all_committees, name = 'all_committee'),
+    path('committee_profile/<int:committee_id>/', views.committee_profile, name = 'committee_profile'),
     
 ]
 

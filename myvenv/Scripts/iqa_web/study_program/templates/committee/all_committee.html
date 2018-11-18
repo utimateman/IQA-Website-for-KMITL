@@ -22,11 +22,11 @@
     
         <br/>
         <br/>
-        <!-- PROGRAM LIST HEADER -->
-        <div class="container border-dark bg-dark text-light">
+        <!-- COMMITTEE LIST HEADER -->
+        <div class="container border-warning bg-warning text-light">
            
             <br/>
-            <h1>Assessment List</h1>
+            <h1>Committee List</h1>
             <br/>
         </div>
         
@@ -59,21 +59,21 @@
         <br/>
 
     
-        <!-- PROGRAM LIST -->
+        <!-- COMMITTEE LIST -->
         <div class=bg-light>
             <ul class="list-group">
-                {% for committee in committees %}
-                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'committee_profile' committee.id %}"><h6>{{ committee.year}} : {{ committee.professor_id.name_surname }}</h6></a>
+                {% for committee in committee_list %}
+                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'committee_profile' committee.id %}"><h6>{{ committee.year}} : {{ committee.professor_id.name_surname}}</h6></a>
                 {% endfor %}
             </ul>
         </div>
 
          <!-- CHANGE PAGE -->
-        <div class="container border-dark bg-dark text-light text-center">
+        <div class="container border-warning bg-warning text-light text-center">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-secondary border-dark bg-dark" href="{% url 'all_assessment' prev_page %}">back</a>
-                <button type="button" class="btn btn-secondary border-dark bg-dark">{{current_page}}</button>
-                <a class="btn btn-secondary border-dark bg-dark" href="{% url 'all_assessment' next_page %}">next</a>
+                <a class="btn btn-secondary border-warning bg-warning" href="{% url 'all_committee' prev_page %}">back</a>
+                <button type="button" class="btn btn-secondary border-warning bg-warning">{{current_page}}</button>
+                <a class="btn btn-secondary border-warning bg-warning" href="{% url 'all_committee' next_page %}">next</a>
             </div>
             <br/>
         </div>

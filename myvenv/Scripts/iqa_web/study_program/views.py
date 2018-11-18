@@ -141,7 +141,7 @@ def assessment_result(request, assessment_id):
 
     return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list})
 
-def all_committee(request, page_number=1):
+def all_committees(request, page_number=1):
         
     from_item = (page_number * 10) - 10
     to_item = page_number * 10
@@ -153,10 +153,10 @@ def all_committee(request, page_number=1):
     committee_list = []
 
     for committee in committees:
-        assessment_list.append(committee)
+        committee_list.append(committee)
     
     # get 10 items/ page
-    committee_list = assessment_list[from_item:to_item]
+    committee_list = committee_list[from_item:to_item]
 
     # adjust page button
     prev_page = page_number - 1
@@ -170,5 +170,14 @@ def all_committee(request, page_number=1):
         next_page = current_page
 
    
-    return render(request, 'assessment/all_assessment.html', {'committee_list': committee_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
+    return render(request, 'committee/all_committee.html', {'committee_list': committee_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
   
+
+def committee_profile(request, committee_id):
+    detail = get_object_or_404(Committee, pk=committee_id)
+
+    assessment_list = []
+    for assessment in detail.assessment_programs.all():
+        assessment_list.append(assessment)
+        
+    return render(request, 'committee/committee_detail.html', {'committee_detail': detail,'assessment_list': assessment_list})
