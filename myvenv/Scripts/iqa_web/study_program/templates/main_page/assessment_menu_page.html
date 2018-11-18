@@ -30,13 +30,13 @@
         </div>
         <div class="col">
             <div class="row">
-                    <button type="button" class="btn btn-dark col-md-6"><a href="{% url 'all_assessment' %}">Assessment List</a></button>
-                    <button type="button" class="btn btn-dark col-md-6"><a href="{% url 'all_committee' %}">IQA Committee List</a></button>
+                    <form method="GET" action="{% url 'all_assessment' %}" class="btn btn-dark col-md-6"><button type="submit" class="border-0 col-md-12 btn-dark">Past Assessments</button></form>
+                    <form method="GET" action="{% url 'all_committee' %}" class="btn btn-dark col-md-6"><button type="submit" class="border-0 col-md-12 btn-dark">IQA Committee List</button></form>
             </div>
     
             <div class="row">
-                    <button type="button" class="btn btn-dark col-md-6" href="{% url 'all_program' %}">temp</button>
-                    <button type="button" class="btn btn-dark col-md-6" href="{% url 'all_program' %}">temp</button>
+                    <form method="GET" action="{% url 'all_assessment' %}" class="btn btn-dark col-md-6"><button class="border-0 col-md-12 btn-dark" type="submit" >temp</button></form>
+                    <form method="GET" action="{% url 'all_assessment' %}" class="btn btn-dark col-md-6"><button class="border-0 col-md-12 btn-dark" type="submit">temp</button></form>
             </div>
         </div>
         <div class="col"></div>

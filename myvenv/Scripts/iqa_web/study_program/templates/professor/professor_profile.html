@@ -111,7 +111,7 @@
         <div class=bg-light>
             <ul class="list-group">
                 {% for year in committee_list %}
-                    <a class="list-group-item list-group-item-light bg-light" href = "">{{ year.year}} : {{ year.assessment_level }}</a>
+                    <a class="list-group-item list-group-item-light bg-light" href = "{% url 'committee_profile' year.id %}">{{ year.year}} : {{ year.assessment_level }}</a>
                 {% endfor %}
             </ul>
         </div>

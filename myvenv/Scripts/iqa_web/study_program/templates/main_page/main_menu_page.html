@@ -30,8 +30,8 @@
     </div>
     <div class="col">
         <div class="row">
-                <button type="button" class="btn btn-dark col-md-6"><a href="{% url 'all_program' %}">StudyProgram</a></button>
-                <button type="button" class="btn btn-dark col-md-6"><a href="{% url 'assessment_menu' %}">Assessment</a></button>
+                <form method="GET" action="{% url 'all_program' %}" class="btn btn-dark col-md-6"><button type="submit" class="border-0 btn-dark col-md-12">StudyProgram</button></form>
+                <form method="GET" action="{% url 'assessment_menu' %}" class="btn btn-dark col-md-6"><button type="submit" class="border-0 btn-dark col-md-12">Assessment</button></form>
         </div>
 
         <div class="row">
