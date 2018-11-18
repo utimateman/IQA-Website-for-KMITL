@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import StudyProgram, Professor, AssessmentResult
+from .models import StudyProgram, Professor, AssessmentResult, Committee
 
 import math
 
 
 #### Create your views here ####
+def main_menu(request):
+    return render(request, 'main_page/main_menu_page.html')
+
+def assessment_menu(request):
+    return render(request, 'main_page/assessment_menu_page.html')
 
 def all_programs(request, page_number = 1):
     
@@ -68,7 +73,12 @@ def program_detail(request, program_id):
     professor_list = []
     for professor in detail.responsible_professors.all():
         professor_list.append(professor)
-    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list})
+
+    assessment_list =[]
+    for assessment in detail.past_assessment.all():
+        assessment_list.append(assessment)
+
+    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list})
 
 
 def professor_detail(request, professor_id):
@@ -82,7 +92,8 @@ def professor_detail(request, professor_id):
     for comittee_per_year in profile.committee_profile.all():
         committee_list.append(comittee_per_year)
 
- 
+   
+
     return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list})
 
 
@@ -129,3 +140,35 @@ def assessment_result(request, assessment_id):
     #assessment_result.aun_id
 
     return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list})
+
+def all_committee(request, page_number=1):
+        
+    from_item = (page_number * 10) - 10
+    to_item = page_number * 10
+
+    c = Committee.objects # get object
+    committees = c.all() # get all objects
+    total_committee = c.count() # get length of object
+
+    committee_list = []
+
+    for committee in committees:
+        assessment_list.append(committee)
+    
+    # get 10 items/ page
+    committee_list = assessment_list[from_item:to_item]
+
+    # adjust page button
+    prev_page = page_number - 1
+    if(page_number - 1 < 1):
+        prev_page = 1  
+
+    current_page = page_number
+
+    next_page = page_number + 1
+    if(next_page > math.ceil(total_committee/10)):
+        next_page = current_page
+
+   
+    return render(request, 'assessment/all_assessment.html', {'committee_list': committee_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
+  

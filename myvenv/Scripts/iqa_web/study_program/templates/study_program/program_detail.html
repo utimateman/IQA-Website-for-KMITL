@@ -49,11 +49,11 @@
         <br/>
         <br/>
         
+         <!-- RESPONSIBLE PROFESSOR -->
         <div class="text-light bg-dark border border-dark container">
             <h4>Responsible Lecturer</h4>
         </div>
             
-        <!-- RESPONSIBLE PROFESSOR -->
         <div class=bg-light>
             <ul class="list-group">
                 {% for responsible_professor in professors %}
@@ -69,13 +69,13 @@
         <div class="text-light bg-dark border border-dark container">
             <h4>Assesment Result</h4>
         </div>
-        <div class= "container bg-light border">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+        
+        <div class=bg-light>
+            <ul class="list-group">
+                {% for assessment in assessment_list %}
+                    <a class="list-group-item list-group-item-light bg-light"  href = "{% url 'assessment_result' assessment.id %}">{{assessment.year}} : {{ assessment.program_id }}</a>
+                {% endfor %}
+            </ul>
         </div>
         <br/>
         <br/>
