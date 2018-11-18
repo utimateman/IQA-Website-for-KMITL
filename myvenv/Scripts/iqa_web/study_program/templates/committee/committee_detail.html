@@ -57,7 +57,7 @@
         <div class=bg-light>
             <ul class="list-group">
                 {% for assessment in assessment_list %}
-                    <a class="list-group-item list-group-item-light bg-light"  href = "{% url 'professor_profile' responsible_professor.id %}">{{ assessment.program_id}}</a>
+                    <a class="list-group-item list-group-item-light bg-light"  href = "{% url 'program_detail' assessment.id %}">{{ assessment.program_id}}</a>
                 {% endfor %}
             </ul>
         </div>
