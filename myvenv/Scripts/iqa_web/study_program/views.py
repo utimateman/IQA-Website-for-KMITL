@@ -179,5 +179,7 @@ def committee_profile(request, committee_id):
     assessment_list = []
     for assessment in detail.assessment_programs.all():
         assessment_list.append(assessment)
-        
-    return render(request, 'committee/committee_detail.html', {'committee_detail': detail,'assessment_list': assessment_list})
+    
+    id_kub = detail.professor_id.id()
+    print(id_kub)
+    return render(request, 'committee/committee_detail.html', {'committee_detail': detail, 'professor_profile':id_kub, 'assessment_list': assessment_list})

@@ -42,7 +42,7 @@
             <h5>year: {{ committee_detail.year }}</h5>
             <h5>profession: {{ committee_detail.profession }}</h5>
             <br/>
-            <a class= "btn btn-warning" href="{{ program_detail.pdf_docs.url }}">docs</a>
+            <a class= "btn btn-warning" href="{% url 'professor_profile' professor_profile %}">FULL PROFILE</a>
             <br/>
             <br/>
         </div>
