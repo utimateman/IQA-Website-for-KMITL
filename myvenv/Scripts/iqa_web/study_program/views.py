@@ -98,7 +98,6 @@ def professor_detail(request, professor_id):
 
 
 
-
 def all_assessments(request, page_number=1):
         
     from_item = (page_number * 10) - 10

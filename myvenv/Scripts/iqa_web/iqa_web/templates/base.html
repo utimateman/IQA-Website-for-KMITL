@@ -1,6 +1,11 @@
 
 
-<a href="{% url 'main_menu' %}">HOME</a>
+<a href="{% url 'main_menu' %}">HOME  </a>
+<a href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+<form id="logout" method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <input type="hidden" />
+</form>
 
 <br/>
 <br/>
