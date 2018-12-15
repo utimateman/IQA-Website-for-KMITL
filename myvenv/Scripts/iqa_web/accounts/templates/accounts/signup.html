@@ -1,5 +1,6 @@
 <h1>SIGN UP</h1>
 
+{{ error }}
 <form method="POST" action="{% url 'signup' %}">
     <!-- protect website from some form of attack -->
     {% csrf_token %} 
