@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-
 from .models import StudyProgram, Professor, AssessmentResult, Committee
 
 import math
@@ -78,7 +77,7 @@ def program_detail(request, program_id):
     for assessment in detail.past_assessment.all():
         assessment_list.append(assessment)
 
-    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list})
+    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list, 'pk': program_id})
 
 
 def professor_detail(request, professor_id):
@@ -182,3 +181,4 @@ def committee_profile(request, committee_id):
     id_kub = detail.professor_id.id
     print(id_kub)
     return render(request, 'committee/committee_detail.html', {'committee_detail': detail, 'professor_profile':id_kub, 'assessment_list': assessment_list})
+
