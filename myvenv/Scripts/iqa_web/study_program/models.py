@@ -39,6 +39,7 @@ class Professor(models.Model):
         return self.name_surname
 
 
+
 class StudyProgram(models.Model):
     code = models.CharField(max_length=200)
     name = models.CharField(max_length=200)

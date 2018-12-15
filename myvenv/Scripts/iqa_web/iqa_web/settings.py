@@ -55,7 +55,7 @@ ROOT_URLCONF = 'iqa_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['iqa_web/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,7 +114,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'iqa_web/static/')
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
