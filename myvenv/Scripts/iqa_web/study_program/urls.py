@@ -27,10 +27,16 @@ urlpatterns = [
     
     
     #https://django.cowhite.com/blog/adding-and-editing-model-objects-using-django-class-based-views-and-forms/
+    
+    # edit form
     path('study_program/edit/<int:program_id>', views.edit_study_program, name = "edit_study_program"),
     path('professors/edit/<int:professor_id>', views.edit_professor_profile, name = "edit_professor_profile"),
     path('assessment/edit/<int:assessment_id>', views.edit_assessment_result, name = "edit_assessment_result"),
     path('committee/edit/<int:committee_id>', views.edit_committee_profile, name = "edit_committee_profile"),
+
+    # create form
+    path('study_program/create', views.create_study_program, name = "create_study_program"),
+
 
     #path('edit/study_program/<int:id>', views.my_view, name="index")
     #path('', lambda _: redirect('/admin/study_program/studyprogram/'), name="index")

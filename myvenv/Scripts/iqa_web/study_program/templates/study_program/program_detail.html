@@ -39,9 +39,12 @@
         </div>
 
         <!-- EDIT -->    
+        {% if request.user.is_superuser %}
         <form method="GET" action="{% url 'edit_study_program' program_id %}">
             <button type="submit" class="btn btn-dark col-md-6">edit</button>
         </form>
+        {% else %}
+        {% endif %}
 
         <!-- BASIC INFO -->
         <div class="container bg-light border">

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import StudyProgram, Professor, AssessmentResult, Committee
 from .forms import StudyProgramForm, ProfessorForm, AssessmentResultForm, CommitteeForm
 
@@ -6,12 +7,16 @@ import math
 
 
 #### Create your views here ####
+
+@login_required(login_url="/login")
 def main_menu(request):
     return render(request, 'main_page/main_menu_page.html')
 
+@login_required(login_url="/login")
 def assessment_menu(request):
     return render(request, 'main_page/assessment_menu_page.html')
 
+@login_required(login_url='login')
 def all_programs(request, page_number = 1):
     
     from_item = (page_number * 10) - 10
@@ -65,6 +70,7 @@ def all_programs(request, page_number = 1):
 
 
 
+@login_required(login_url="login")
 def program_detail(request, program_id):
     detail = get_object_or_404(StudyProgram, pk=program_id)
 
@@ -81,6 +87,7 @@ def program_detail(request, program_id):
     return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list, 'program_id': program_id})
 
 
+@login_required(login_url="login")
 def professor_detail(request, professor_id):
     profile = get_object_or_404(Professor, pk=professor_id)
 
@@ -97,7 +104,7 @@ def professor_detail(request, professor_id):
     return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list, 'professor_id':professor_id})
 
 
-
+@login_required(login_url="login")
 def all_assessments(request, page_number=1):
         
     from_item = (page_number * 10) - 10
@@ -129,6 +136,8 @@ def all_assessments(request, page_number=1):
    
     return render(request, 'assessment/all_assessment.html', {'assessments': assessment_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
 
+
+@login_required(login_url="login")
 def assessment_result(request, assessment_id):
     detail = get_object_or_404(AssessmentResult, pk=assessment_id)
 
@@ -140,6 +149,8 @@ def assessment_result(request, assessment_id):
 
     return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list, 'assessment_id': assessment_id})
 
+
+@login_required(login_url="login")
 def all_committees(request, page_number=1):
         
     from_item = (page_number * 10) - 10
@@ -172,6 +183,7 @@ def all_committees(request, page_number=1):
     return render(request, 'committee/all_committee.html', {'committee_list': committee_list, 'current_page': current_page, 'prev_page': prev_page, 'next_page':next_page})
   
 
+@login_required(login_url="login")
 def committee_profile(request, committee_id):
     detail = get_object_or_404(Committee, pk=committee_id)
 
@@ -190,19 +202,18 @@ def committee_profile(request, committee_id):
 def create_study_program(request):
     form = StudyProgramForm(request.POST or None)
     if form.is_valid():
+        print("kao if")
         form.save()
+        print("save leaw")
         form = StudyProgramForm()
 
-    context = {
-        'form':form
-    }
-    return redirect("all_program")
-    #return render(request, "study_program/create_study_program.html", context)
-
+    context = { 'form': form }
+    return render(request, "study_program/create_study_program.html", context)
 
 #################### EDIT ####################
 
-
+@user_passes_test(lambda u: u.is_superuser, login_url='all_program')
+@login_required(login_url="login")
 def edit_study_program(request, program_id):
     study_program = get_object_or_404(StudyProgram, pk=program_id)
     if request.method == "POST":
@@ -220,6 +231,8 @@ def edit_study_program(request, program_id):
     return render(request, "study_program/edit_study_program.html", context)
 
 
+@user_passes_test(lambda u: u.is_superuser, login_url='all_program')
+@login_required(login_url="login")
 def edit_professor_profile(request, professor_id):
     professor = get_object_or_404(Professor, pk=professor_id)
     if request.method == "POST":
@@ -237,6 +250,8 @@ def edit_professor_profile(request, professor_id):
     return render(request, "professor/edit_professor_profile.html", context)
 
 
+@user_passes_test(lambda u: u.is_superuser, login_url='all_assessment')
+@login_required(login_url="login")
 def edit_assessment_result(request, assessment_id):
     assessment = get_object_or_404(AssessmentResult, pk=assessment_id)
     if request.method == "POST":
@@ -254,6 +269,8 @@ def edit_assessment_result(request, assessment_id):
     return render(request, "assessment/edit_assessment_result.html", context)
 
 
+@user_passes_test(lambda u: u.is_superuser, login_url='all_committee')
+@login_required(login_url="login")
 def edit_committee_profile(request, committee_id):
     committee = get_object_or_404(Committee, pk=committee_id)
     if request.method == "POST":
