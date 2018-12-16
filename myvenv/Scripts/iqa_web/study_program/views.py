@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import StudyProgram, Professor, AssessmentResult, Committee
+from .forms import StudyProgramForm
 
 import math
 
@@ -77,7 +78,7 @@ def program_detail(request, program_id):
     for assessment in detail.past_assessment.all():
         assessment_list.append(assessment)
 
-    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list, 'pk': program_id})
+    return render(request, 'study_program/program_detail.html', {'program_detail': detail, 'faculties': faculties_list, 'professors':professor_list, 'assessment_list':assessment_list, 'program_id': program_id})
 
 
 def professor_detail(request, professor_id):
@@ -182,3 +183,34 @@ def committee_profile(request, committee_id):
     print(id_kub)
     return render(request, 'committee/committee_detail.html', {'committee_detail': detail, 'professor_profile':id_kub, 'assessment_list': assessment_list})
 
+
+## CREATE / EDIT ##
+
+def create_study_program(request):
+    form = StudyProgramForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = StudyProgramForm()
+
+    context = {
+        'form':form
+    }
+    return redirect("all_program")
+    #return render(request, "study_program/create_study_program.html", context)
+
+
+def edit_study_program(request, program_id):
+    study_program = get_object_or_404(StudyProgram, pk=program_id)
+    if request.method == "POST":
+        form = StudyProgramForm(request.POST, instance=study_program)
+        if form.is_valid():
+            form.save()
+            return redirect('program_detail', program_id = program_id)
+
+    else:
+        form = StudyProgramForm(instance=study_program)
+
+    context = {
+        'form':form
+    }
+    return render(request, "study_program/edit_study_program.html", context)

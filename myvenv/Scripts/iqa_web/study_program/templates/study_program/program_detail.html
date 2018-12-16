@@ -38,12 +38,10 @@
             <br/>
         </div>
 
-        <!-- EDIT -->
-        <h1>{{pk}}</h1>
-        <form method="GET" action="{% url 'index' %}">
-            <button type="submit" class="btn btn-dark col-md-6"></button>
+        <!-- EDIT -->    
+        <form method="GET" action="{% url 'edit_study_program' program_id %}">
+            <button type="submit" class="btn btn-dark col-md-6">edit</button>
         </form>
-        
 
         <!-- BASIC INFO -->
         <div class="container bg-light border">

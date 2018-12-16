@@ -25,9 +25,12 @@ urlpatterns = [
     path('committee/<int:page_number>/', views.all_committees, name = 'all_committee'),
     path('committee_profile/<int:committee_id>/', views.committee_profile, name = 'committee_profile'),
     
-    #path('edit/study_program/<int:id>', views.my_view, name="index")
+    
     #https://django.cowhite.com/blog/adding-and-editing-model-objects-using-django-class-based-views-and-forms/
-    path('', lambda _: redirect('/admin/study_program/studyprogram/'), name="index")
+    path('study_program/edit/<int:program_id>', views.edit_study_program, name = "edit_study_program")
+
+    #path('edit/study_program/<int:id>', views.my_view, name="index")
+    #path('', lambda _: redirect('/admin/study_program/studyprogram/'), name="index")
     #path('', lambda _: redirect('admin:index'), name="index")
 ]
 
