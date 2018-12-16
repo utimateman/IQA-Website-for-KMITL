@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'inbox.apps.InboxConfig',
     'accounts.apps.AccountsConfig',
     'study_program.apps.StudyProgramConfig',
     'django.contrib.admin',
