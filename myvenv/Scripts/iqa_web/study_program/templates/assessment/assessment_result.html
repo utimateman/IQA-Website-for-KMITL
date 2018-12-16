@@ -24,17 +24,24 @@
 <main>
 
 
-    <!-- TITLE -->
+    
     <div class="container">
 
         <br/>
         <br/>
         <br/>
+
+        <!-- TITLE -->
         <div class="text-light bg-danger border-danger container">
             <br/>
             <h3>{{assessment_result.year}} : {{ assessment_result.program_id }}</h3>
             <br/>
         </div>
+
+        <!-- EDIT -->    
+        <form method="GET" action="{% url 'edit_assessment_result' assessment_id %}">
+            <button type="submit" class="btn btn-dark col-md-6">edit</button>
+        </form>
 
         <!-- BASIC INFO -->
         <div class="container bg-light border">

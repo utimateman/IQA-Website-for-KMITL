@@ -24,17 +24,24 @@
 <main>
 
 
-    <!-- TITLE -->
+    
     <div class="container">
 
         <br/>
         <br/>
         <br/>
+
+        <!-- TITLE -->
         <div class="text-light bg-success border-success container">
             <br/>
             <h3>{{ professor_profile.academic_title }}  {{ professor_profile.name_surname }}</h3>
             <br/>
         </div>
+
+        <!-- EDIT -->    
+        <form method="GET" action="{% url 'edit_professor_profile' professor_id %}">
+            <button type="submit" class="btn btn-dark col-md-6">edit</button>
+        </form>
 
         <!-- BASIC INFO -->
         <div class="container bg-light border">

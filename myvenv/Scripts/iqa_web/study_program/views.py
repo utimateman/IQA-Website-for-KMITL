@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import StudyProgram, Professor, AssessmentResult, Committee
-from .forms import StudyProgramForm
+from .forms import StudyProgramForm, ProfessorForm, AssessmentResultForm, CommitteeForm
 
 import math
 
@@ -94,7 +94,7 @@ def professor_detail(request, professor_id):
 
    
 
-    return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list})
+    return render(request, 'professor/professor_profile.html', {'professor_profile': profile, 'responsible_program':responsible_program, 'committee_list':committee_list, 'professor_id':professor_id})
 
 
 
@@ -138,7 +138,7 @@ def assessment_result(request, assessment_id):
 
     #assessment_result.aun_id
 
-    return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list})
+    return render(request, 'assessment/assessment_result.html', {'assessment_result': detail, 'commitee_list':commitee_list, 'assessment_id': assessment_id})
 
 def all_committees(request, page_number=1):
         
@@ -181,10 +181,11 @@ def committee_profile(request, committee_id):
     
     id_kub = detail.professor_id.id
     print(id_kub)
-    return render(request, 'committee/committee_detail.html', {'committee_detail': detail, 'professor_profile':id_kub, 'assessment_list': assessment_list})
+    return render(request, 'committee/committee_detail.html', {'committee_detail': detail, 'professor_profile':id_kub, 'assessment_list': assessment_list, 'committee_id':committee_id})
 
 
-## CREATE / EDIT ##
+
+#################### CREATE ####################
 
 def create_study_program(request):
     form = StudyProgramForm(request.POST or None)
@@ -197,6 +198,9 @@ def create_study_program(request):
     }
     return redirect("all_program")
     #return render(request, "study_program/create_study_program.html", context)
+
+
+#################### EDIT ####################
 
 
 def edit_study_program(request, program_id):
@@ -214,3 +218,54 @@ def edit_study_program(request, program_id):
         'form':form
     }
     return render(request, "study_program/edit_study_program.html", context)
+
+
+def edit_professor_profile(request, professor_id):
+    professor = get_object_or_404(Professor, pk=professor_id)
+    if request.method == "POST":
+        form = ProfessorForm(request.POST, instance=professor)
+        if form.is_valid():
+            form.save()
+            return redirect('professor_profile', professor_id = professor_id)
+
+    else:
+        form = ProfessorForm(instance=professor)
+
+    context = {
+        'form':form
+    }
+    return render(request, "professor/edit_professor_profile.html", context)
+
+
+def edit_assessment_result(request, assessment_id):
+    assessment = get_object_or_404(AssessmentResult, pk=assessment_id)
+    if request.method == "POST":
+        form = AssessmentResultForm(request.POST, instance=assessment)
+        if form.is_valid():
+            form.save()
+            return redirect('assessment_result', assessment_id = assessment_id)
+
+    else:
+        form = AssessmentResultForm(instance=assessment)
+
+    context = {
+        'form':form
+    }
+    return render(request, "assessment/edit_assessment_result.html", context)
+
+
+def edit_committee_profile(request, committee_id):
+    committee = get_object_or_404(Committee, pk=committee_id)
+    if request.method == "POST":
+        form = CommitteeForm(request.POST, instance=committee)
+        if form.is_valid():
+            form.save()
+            return redirect('committee_profile', committee_id = committee_id)
+
+    else:
+        form = CommitteeForm(instance=committee)
+
+    context = {
+        'form':form
+    }
+    return render(request, "committee/edit_committee_profile.html", context)
